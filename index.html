@@ -121,27 +121,33 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <form>
+          <form name="portofolio-contact-form">
             <div class="mb-3">
-              <label for="name" class="form-label">Nama Lengkap</label>
-              <input type="text" class="form-control" id="name" aria-describedby="name" />
+              <label for="name" class="form-label" aria-required="true">Nama Lengkap</label>
+              <input type="text" class="form-control" id="name" aria-describedby="name" name="nama" />
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" aria-describedby="email" />
+              <input type="email" class="form-control" id="email" aria-describedby="email" name="email" />
               <div class="mb-3">
                 <label for="pesan" class="form-label">Pesan</label>
-                <textarea class="form-control" id="pesan" rows="3"></textarea>
+                <textarea class="form-control" id="pesan" name="pesan" rows="3"></textarea>
               </div>
             </div>
-            <button type="button" class="btn btn-primary mb-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Kirim</button>
+            <button type="submit" class="btn btn-primary btn-kirim" data-bs-toggle="modal" data-bs-target="#exampleModal">Kirim</button>
+
+            <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Loading...
+            </button>
+
             <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Pesan Terkirim!<h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
         Terima kasih telah menggunakan layanan pesan ini. Have a nice day!
@@ -156,7 +162,10 @@
 </div>
           </form>
         </div>
+
+        
       </div>
+      
     </div>
   </section>
     <!-- Akhir Contact -->
@@ -166,7 +175,30 @@
       <p>Created with love by: <a href="www.instagram.com/rosyidfarachi/" class="text-white fw-bold">Muhammad Rosyid Farachi</a></p>
     </footer>
     <!-- Akhir Footer -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> 
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbyDkNWAnCO_KKskQyhFbUEJdWs4tpGFRW81Nqd8S8UyzMtrUqcF04j-NS-Ptm2g4_c7/exec'
+      const form = document.forms['portofolio-contact-form']
+      const btnKirim = document.querySelector('.btn-kirim');
+      const btnLoading = document.querySelector('.btn-loading');
+      form.addEventListener('submit', e => {
+        e.preventDefault()
 
-  </body>
+      // ketika tombol submit di klik
+      //tampilkan loading hilangkan tombol kirim
+      btnLoading.classList.toggle('d-none');
+      btnKirim.classList.toggle('d-none');
+      
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => { 
+            //tampilkan tombol kirim, hilangkan tombol loading
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none');
+            console.log('Success!', response)
+            
+        })
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
+    </body>
 </html>
