@@ -20,7 +20,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav ms-auto">
-            <a class="nav-link active" aria-current="page" href="#home">Home</a>
+            <a class="nav-link" aria-current="page" href="#home">Home</a>
             <a class="nav-link" href="#about">About Me</a>
             <a class="nav-link" href="#Projects">Projects</a>
             <a class="nav-link" href="#contact">Contact</a>
@@ -50,7 +50,7 @@
           <div class="col"><h2>About Me</h2></div>
         </div>
         <div class="row justify-content-center fs-5 text-center">
-          <div class="col-md-4">Hai, saya Muhammad Rosyid Farachi, Alumni Mahasiswa dari Universitas Amikom Yogyakarta jurusan S1-Sistem Informasi. Aktivitas saya terakhir ini sebagai Engineer On Site di UIN Surakarta di PT SaranaInsan MudaSelaras. Saya memiliki sertifikasi Junior Web Development dari lembaga BNSP, berlaku hingga 2026.</div>
+          <div class="col-md-4">Hai, saya Muhammad Rosyid Farachi, Alumni Mahasiswa dari Universitas Amikom Yogyakarta jurusan S1-Sistem Informasi. Aktivitas saya terakhir ini sebagai Engineer On Site di UIN Surakarta di PT SaranaInsan MudaSelaras. Saya memiliki sertifikasi Junior Web Development dari lembaga BNSP, berlaku hingga 2026. <br></div>
           <div class="col-md-4">Saat kuliah saya menguasai ilmu pengembangan website dan Network Computers. selain itu saya juga mahir dalam pengoperasian Microsoft Word, Excel dan Powerpoint. Saya akan terus belajar hal baru dan tidak menutup keinginan untuk belajar banyak perkembangan teknologi dan berkarir tidak di bidang tersebut.</div>
         </div>
       </div>
@@ -179,10 +179,6 @@
     <script>
         
       alert('Welcome Everyone, This is Me!');
-     
-
-
-
       const scriptURL = 'https://script.google.com/macros/s/AKfycbyDkNWAnCO_KKskQyhFbUEJdWs4tpGFRW81Nqd8S8UyzMtrUqcF04j-NS-Ptm2g4_c7/exec'
       const form = document.forms['portofolio-contact-form']
       const btnKirim = document.querySelector('.btn-kirim');
@@ -206,6 +202,25 @@
         })
           .catch(error => console.error('Error!', error.message))
       })
+
+      // Ambil semua elemen dengan class 'nav-link'
+const navLinks = document.querySelectorAll('.nav-link');
+
+// Tambahkan event listener untuk setiap nav-link
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    // Jika link sudah aktif, hapus kelas 'active'
+    if (link.classList.contains('active')) {
+      link.classList.remove('active');
+    } else {
+      // Hapus kelas 'active' dari semua link
+      navLinks.forEach(nav => nav.classList.remove('active'));
+      // Tambahkan kelas 'active' ke link yang diklik
+      link.classList.add('active');
+    }
+  });
+});
+
     </script>
     </body>
 </html>
